@@ -22,21 +22,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: coffee-svc
-  namespace: ingress-nginx
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
 spec:
   externalTrafficPolicy: Local
-  type: LoadBalancer
+  type: ClusterIP
   selector:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app: coffee
   ports:
     - name: http
       port: 80
       targetPort: http
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -62,16 +56,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tea-svc
-  namespace: ingress-nginx
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
 spec:
   externalTrafficPolicy: Local
-  type: LoadBalancer
+  type: ClusterIP
   selector:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app: tea
   ports:
     - name: http
       port: 80
