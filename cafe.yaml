@@ -30,7 +30,8 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: http
+      protocol: TCP
+      targetPort: 8081
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,11 +58,12 @@ kind: Service
 metadata:
   name: tea-svc
 spec:
-  externalTrafficPolicy: Local
   type: ClusterIP
   selector:
     app: tea
   ports:
     - name: http
-      port: 80
-      targetPort: http
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+      
